@@ -7,6 +7,13 @@ public class UFO : MonoBehaviour {
 	public int vida = 3;
 	public float velocidad;
 	public int direccion = 1;
+	public AudioClip sonidoGolpe, sonidoExplosion;
+	public AudioSource audioSource;
+	public Text canvasWorldText, canvasScreenText;
+
+	void Start(){
+		UpdateUI();
+	}
 	
 	void Update () {
 		//movimiento considerando direccion
@@ -26,7 +33,22 @@ public class UFO : MonoBehaviour {
 		//si es golpeado por una bala, reduce su vida en 1 y destruye la bala
 		if(c.collider.tag == "Bala"){
 			vida--;
+			UpdateUI();
+			audioSource.PlayOneShot(sonidoGolpe);
 			Destroy(c.collider.gameObject);
 		}
+	}
+
+	void UpdateUI(){
+		canvasScreenText.text = "Vida UFO: "+vida;
+		canvasWorldText.text = "Vida UFO: "+vida;
+	}
+
+	void OnDestroy(){
+		audioSource.PlayOneShot(sonidoExplosion);
+	}
+
+	void OnGUI(){
+		GUI.Label(new Rect (0,0,100,50),"Vida UFO: "+vida);
 	}
 }

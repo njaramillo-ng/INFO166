@@ -8,6 +8,11 @@ public class Cañon : MonoBehaviour {
 	public GameObject bala;
 	public Transform bocaCañon;
 	public Transform ejeCañon;
+	private AudioSource audioSource;
+
+	void Awake(){
+		audioSource = GetComponent<AudioSource>();
+	}
 	
 	void Update () {
 		//Rotar horizontal (torreta)
@@ -28,6 +33,8 @@ public class Cañon : MonoBehaviour {
 			Rigidbody rbBala = nuevaBala.GetComponent<Rigidbody>();
 			//le aplica una fuerza al rigidbody de la bala
 			rbBala.AddForce(bocaCañon.forward * fuerzaDisparo,ForceMode.Impulse);
+			//reproducir sonido disparo
+			audioSource.Play();
 		}	
 	}
 }
