@@ -9,7 +9,7 @@ public class UFO : MonoBehaviour {
 	public int direccion = 1;
 	public AudioClip sonidoGolpe, sonidoExplosion;
 	public AudioSource audioSource;
-	public Text canvasWorldText, canvasScreenText;
+	public Text canvasWorldText, canvasScreenText, canvasMoveText;
 
 	void Start(){
 		UpdateUI();
@@ -40,8 +40,7 @@ public class UFO : MonoBehaviour {
 	}
 
 	void UpdateUI(){
-		canvasScreenText.text = "Vida UFO: "+vida;
-		canvasWorldText.text = "Vida UFO: "+vida;
+		canvasScreenText.text = canvasWorldText.text = canvasMoveText.text = "Vida UFO: "+vida;
 	}
 
 	void OnDestroy(){
